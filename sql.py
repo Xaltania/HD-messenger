@@ -17,7 +17,7 @@ class SQLDatabase():
         self.conn = sqlite3.connect(database_arg)
         self.cur = self.conn.cursor()
 
-    # SQLite 3 does not natively support multiple commands in a single statement
+    # SQLite 3 does not natively support multiple commands in a single statement... or does it? """"""
     # Using this handler restores this functionality
     # This only returns the output of the last command
     def execute(self, sql_string):
@@ -28,6 +28,10 @@ class SQLDatabase():
             except:
                 pass
         return out
+
+    # Shut down the database
+    def close(self):
+        self.conn.close()
 
     # Commit changes to the database
     def commit(self):
@@ -90,3 +94,7 @@ class SQLDatabase():
             return True
         else:
             return False
+
+    def setup_test_users(self):
+        self.add_user("Terry", "Terry123")
+        self.add_user("Shabab", "Shabab123")

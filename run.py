@@ -26,6 +26,7 @@ from bottle import run
 import model
 import view
 import controller
+import sql
 
 #-----------------------------------------------------------------------------
 
@@ -51,25 +52,38 @@ def run_server():
 # Comment out the current manage_db function, and 
 # uncomment the following one to load an SQLite3 database
 
+"""
 def manage_db():
     '''
         Blank function for database support, use as needed
     '''
     pass
-
 """
-import sql
+
     
 def manage_db():
     '''
         manage_db
         Starts up and re-initialises an SQL databse for the server
     '''
-    database_args = ":memory:" # Currently runs in RAM, might want to change this to a file if you use it
-    sql_db = sql.SQLDatabase(database_args=database_args)
+    database_args = "HDMessengerDB.db" # Currently runs in RAM, might want to change this to a file if you use it
+    sql_db = sql.SQLDatabase(database_arg=database_args)
+    print("".center(80, '-'))
+    print("Database Manager".center(80, '-'))
+    print("".center(80, '-'))
+    print("Type '/help' for commands")
+    while True:
+        usr_in = input("Enter command:")
+        if usr_in == "help":
+            print("""
+            Input may be directly SQL to modify database
+            List of commands:
+            /set_up_test_users - add the test users into the database
+            /clear_db - completely clear database of all users and messages
+            """)
+    
+    # while True:
 
-    return
-"""
 
 #-----------------------------------------------------------------------------
 

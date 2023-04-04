@@ -7,6 +7,7 @@
 '''
 import view
 import random
+from sql import SQLDatabase
 
 # Initialise our views, all arguments are defaults for the template
 page_view = view.View()
@@ -41,12 +42,16 @@ def login_check(username, password):
         login_check
         Checks usernames and passwords
 
+        Salting and hashing performed here
+
         :: username :: The username
         :: password :: The password
 
         Returns either a view for valid credentials, or a view for invalid credentials
     '''
-
+    # Open database 
+    sql_db = db_open()
+    
     # By default assume good creds
     login = True
     
@@ -90,6 +95,19 @@ def about_garble():
     "provide user generated content in real-time will have multiple touchpoints for offshoring."]
     return garble[random.randint(0, len(garble) - 1)]
 
+#-----------------------------------------------------------------------------
+# Debug
+#-----------------------------------------------------------------------------
+
+def db_open():
+    '''
+        manage_db
+        Starts up and re-initialises an SQL databse for the server
+    '''
+    database_args = "HDMessengerDB.db"
+    sql_db = SQLDatabase(database_args=database_args)
+
+    return sql_db
 
 #-----------------------------------------------------------------------------
 # Debug
