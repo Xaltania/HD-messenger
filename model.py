@@ -35,6 +35,19 @@ def login_form():
     return page_view("login")
 
 #-----------------------------------------------------------------------------
+# Sign up
+#-----------------------------------------------------------------------------
+
+def signup_form():
+    '''
+        signup_form
+        Returns the view for the signup_form
+    '''
+    return page_view("signup")
+
+#-----------------------------------------------------------------------------
+
+
 
 # Check the login credentials
 def login_check(username, password):

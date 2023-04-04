@@ -1,4 +1,4 @@
-/* ul {
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ li {
 
 li a {
     display: block;
-    color: rgb(255, 255, 255);
+    color: rgb(7, 129, 88);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -36,14 +36,14 @@ img {
     max-width: 45%;
 }
 
-html, body, {
+/* html, body, {
     position:fixed;
     top:0;
     bottom:0;
     left:0;
     right:0;
-} */
+}
 
 body {
     font-weight: 500;
-}
+} */

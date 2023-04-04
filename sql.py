@@ -100,8 +100,8 @@ class SQLDatabase():
             return False
 
     def setup_test_users(self):
-        self.add_user("Terry", "Terry123")
-        self.add_user("Shabab", "Shabab123")
+        print(self.add_user("Terry", "Terry123"))
+        print(self.add_user("Shabab", "Shabab123"))
     
     def get_users(self):
         self.cur.execute("SELECT * FROM Users")

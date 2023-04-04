@@ -105,6 +105,25 @@ def post_login():
     return model.login_check(username, password)
 
 
+# Prompt signup page
+@get('/signup')
+def get_signup_controller():
+    '''
+        get_signup
+
+        serves the signup page
+    '''
+    return model.signup_form()
+
+#Attempt a signup
+@post('/signup')
+def post_signup():
+    '''
+        post_signup
+
+        Handles signup attempts
+        Expects a form containing 'username', 'password' and 'password2' fields
+    '''
 
 #-----------------------------------------------------------------------------
 

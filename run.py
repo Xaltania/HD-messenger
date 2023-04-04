@@ -80,15 +80,18 @@ def manage_db():
                 print("""
                 Input may be directly SQL to modify database
                 List of commands:
-                /db_setup - Create a table for users
+                /db_setup - create a table for users
                 /db_clear - completely clear database of all users and messages
                 /quit - exit the manager
                 /setup_test_users - add the test users into the database
+                /users - display a list of all users
                 """)
             case "/db_setup":
                 sql_db.database_setup()
                 print("Setting up...")
                 print("Set-up successful")
+            case "/users":
+                print(sql_db.get_users())
             case "/setup_test_users":
                 print("Setting up test users...")
                 sql_db.setup_test_users()
