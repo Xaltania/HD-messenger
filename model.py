@@ -51,18 +51,17 @@ def login_check(username, password):
     '''
     # Open database 
     sql_db = db_open()
-    
     # By default assume good creds
+
     login = True
+    valid = sql_db.check_credentials(username=username, password=password)
+    print(f"password is {valid}")
     
-    if username != "admin": # Wrong Username
-        err_str = "Incorrect Username"
+    if not valid:
+        err_str = "The username or password entered was invalid."
         login = False
     
-    if password != "password": # Wrong password
-        err_str = "Incorrect Password"
-        login = False
-        
+    sql_db.close()
     if login: 
         return page_view("valid", name=username)
     else:
@@ -101,11 +100,11 @@ def about_garble():
 
 def db_open():
     '''
-        manage_db
-        Starts up and re-initialises an SQL databse for the server
+        Opens the database
+        :return: sqlite database object
     '''
     database_args = "HDMessengerDB.db"
-    sql_db = SQLDatabase(database_args=database_args)
+    sql_db = SQLDatabase(database_arg=database_args)
 
     return sql_db
 

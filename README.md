@@ -8,6 +8,8 @@
 
 ### Back end
 - [ ] Store text in database
+- [x] Create database manager
+- [ ] Create users option
 - [ ] salt passwords
 - [ ] hash passwords
 - [ ] Combine invalid into login page?

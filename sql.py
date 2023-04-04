@@ -17,7 +17,7 @@ class SQLDatabase():
         self.conn = sqlite3.connect(database_arg)
         self.cur = self.conn.cursor()
 
-    # SQLite 3 does not natively support multiple commands in a single statement... or does it? """"""
+    # SQLite 3 does not natively support multiple commands in a single statement
     # Using this handler restores this functionality
     # This only returns the output of the last command
     def execute(self, sql_string):
@@ -37,6 +37,10 @@ class SQLDatabase():
     def commit(self):
         self.conn.commit()
 
+    def fetchall(self) -> str:
+        fetch = self.fetchall()
+        return fetch
+
     #-----------------------------------------------------------------------------
     
     # Sets up the database
@@ -49,7 +53,6 @@ class SQLDatabase():
 
         # Create the users table
         self.execute("""CREATE TABLE Users(
-            Id INT,
             username TEXT,
             password TEXT,
             admin INTEGER DEFAULT 0
@@ -58,7 +61,7 @@ class SQLDatabase():
         self.commit()
 
         # Add our admin user
-        self.add_user('admin', admin_pasword, admin=1)
+        self.add_user('admin', admin_password, admin=1)
 
     #-----------------------------------------------------------------------------
     # User handling
@@ -67,8 +70,8 @@ class SQLDatabase():
     # Add a user to the database
     def add_user(self, username, password, admin=0):
         sql_cmd = """
-                INSERT INTO Users
-                VALUES({id}, '{username}', '{password}', {admin})
+                INSERT INTO Users;
+                VALUES('{username}', '{password}', {admin})
             """
 
         sql_cmd = sql_cmd.format(username=username, password=password, admin=admin)
@@ -82,15 +85,16 @@ class SQLDatabase():
     # Check login credentials
     def check_credentials(self, username, password):
         sql_query = """
-                SELECT 1 
+                SELECT 1
                 FROM Users
                 WHERE username = '{username}' AND password = '{password}'
             """
 
-        sql_query = sql_query.format(username=username, password=password)
-
+        sql_query = sql_query.format(username = username, password = password)
+        self.execute(sql_query)
+        self.commit()
         # If our query returns
-        if cur.fetchone():
+        if self.cur.fetchone():
             return True
         else:
             return False
@@ -98,3 +102,11 @@ class SQLDatabase():
     def setup_test_users(self):
         self.add_user("Terry", "Terry123")
         self.add_user("Shabab", "Shabab123")
+    
+    def get_users(self):
+        self.cur.execute("SELECT * FROM Users")
+        ls = self.cur.fetchall()
+        return ls
+# db = SQLDatabase("HDMessengerDB.db")
+# db.setup_test_users()
+# db.close()

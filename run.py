@@ -73,14 +73,51 @@ def manage_db():
     print("".center(80, '-'))
     print("Type '/help' for commands")
     while True:
-        usr_in = input("Enter command:")
-        if usr_in == "help":
-            print("""
-            Input may be directly SQL to modify database
-            List of commands:
-            /set_up_test_users - add the test users into the database
-            /clear_db - completely clear database of all users and messages
-            """)
+        usr_in = input("Enter command: ")
+        
+        match usr_in:
+            case "/help":
+                print("""
+                Input may be directly SQL to modify database
+                List of commands:
+                /db_setup - Create a table for users
+                /db_clear - completely clear database of all users and messages
+                /quit - exit the manager
+                /setup_test_users - add the test users into the database
+                """)
+            case "/db_setup":
+                sql_db.database_setup()
+                print("Setting up...")
+                print("Set-up successful")
+            case "/setup_test_users":
+                print("Setting up test users...")
+                sql_db.setup_test_users()
+                print("Set-up successful")
+            case "/db_clear":
+                confirm = input("""WARNING: You are about to clear the entire
+database, including all users, passwords and messages. Are you sure? (Y/n)
+""")
+                while confirm != "Y" and confirm != "n":
+                    confirm = input("Please select from: 'Y' for yes, 'n' for no.")
+                if confirm == "Y":
+                    sql_db.execute("""PRAGMA writable_schema = 1;
+                    DELETE FROM sqlite_master;
+                    PRAGMA writable_schema = 0;
+                    VACUUM;
+                    PRAGMA integrity_check;
+                        )""")
+                    print("Database cleared")
+                elif confirm == "n":
+                    pass
+            case "/quit":
+                print("Exiting...")
+                break
+            case _:
+                msg = sql_db.execute(usr_in)
+                if msg != None:
+                    print(msg)
+                    print(sql_db.fetchall())
+                
     
     # while True:
 
