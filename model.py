@@ -43,11 +43,33 @@ def signup_form():
         signup_form
         Returns the view for the signup_form
     '''
-    return page_view("signup")
+    return page_view("/signup/signup")
 
 #-----------------------------------------------------------------------------
 
+# Check signup details
+def signup_check(username, password, confirm_pwd):
+    '''
+        signup_check
+        Checks that username is unique and that passwords match
 
+        :: username :: The username
+        :: password :: The password
+        :: confirm_pwd :: Re-entered password
+
+        Returns a successful signup or failure
+    '''
+    # Open database
+    sql_db = db_open()
+
+    exists = sql_db.user_exists(username=username)
+    if exists or password != confirm_pwd:
+        pass
+        page_view("signup_name_fail")
+    else:
+        pass
+        # Load to success!
+    
 
 # Check the login credentials
 def login_check(username, password):

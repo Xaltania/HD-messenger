@@ -5,7 +5,7 @@ c = connection.cursor()
         
 c.execute("""
         INSERT INTO Users
-        VALUES('admin', 'admin', 1)
+        VALUES('Terry', 'Terry123', 0)
         """)
 connection.commit()
 c.execute("SELECT * FROM Users")

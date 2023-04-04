@@ -70,7 +70,7 @@ class SQLDatabase():
     # Add a user to the database
     def add_user(self, username, password, admin=0):
         sql_cmd = """
-                INSERT INTO Users;
+                INSERT INTO Users
                 VALUES('{username}', '{password}', {admin})
             """
 
@@ -81,6 +81,20 @@ class SQLDatabase():
         return True
 
     #-----------------------------------------------------------------------------
+
+    # Check if user exists
+    def user_exists(self, username):
+        sql_query = """
+                SELECT 1
+                FROM Users
+                Where username = '{username}'
+        """
+        self.execute(sql_query)
+        self.commit()
+        if self.cur.fetchone():
+            return True
+        else:
+            return False
 
     # Check login credentials
     def check_credentials(self, username, password):
@@ -100,8 +114,8 @@ class SQLDatabase():
             return False
 
     def setup_test_users(self):
-        print(self.add_user("Terry", "Terry123"))
-        print(self.add_user("Shabab", "Shabab123"))
+        self.add_user("Terry", "Terry123")
+        self.add_user("Shabab", "Shabab123")
     
     def get_users(self):
         self.cur.execute("SELECT * FROM Users")

@@ -7,7 +7,7 @@ ul {
 }
 
 li {
-    float: left;
+    float: right;
 }
 
 li a {
@@ -20,6 +20,7 @@ li a {
 
 li a:hover {
     background-color: #111;
+    float:right;
 }
 
 html, body {
