@@ -1,26 +1,14 @@
-# HD Messenger
-## Checklist
-### Front end
-- [ ] Remove big picture.
-- [ ] Add messaging tab on the right, or as a tab somewhere
-- [ ] Have some logo or something
-- [ ] Style users
-- [ ] Padding for 'add users' section
+To setup, install these packages
 
-### Back end
-<u>Database</u>
-- [ ] Store text in database
-- [x] Create database manager
-- [x] Add users skeleton
-- [ ] Create users option
+```bash
+pip install SQLAlchemy flask-socketio simple-websocket
+```
 
+To run the app, 
 
-<u>Cryptography</u>
-- [ ] salt passwords
-- [ ] hash passwords
-- [ ] Combine invalid into login page?
-- [ ] establish communication between two messengers
-- [ ] Encrypt messages (First decide on method of encryption)
+```bash
+python3 app.py
+```
 
-<u>Nitty gritties</u>
-- [ ] valid login to straight up take us back to home page
+Since this app uses cookies, you can't open it in separate tabs to test multiple client communication. This is because cookies are shared across tabs.
+You'd have to use multiple browsers to test client communication.
