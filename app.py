@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, abort, url_for
+from flask import Flask, render_template, request, abort, url_for, jsonify
 from flask_socketio import SocketIO
+
 import db
 import secrets
 # import logging
@@ -79,4 +80,6 @@ def home():
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    ssl_context = ('certificate/localhost.crt', 'certificate/localhost.key')
+    # ssl_context.load_cert_chain('certs/messenger.test.crt', 'certs/messenger.key')
+    socketio.run(app=app, ssl_context=ssl_context, port=443)
