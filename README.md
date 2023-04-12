@@ -1,14 +1,15 @@
-To setup, install these packages
+# HD Messenger
+## Checklist
+- [ ] Add messaging tab on the right, or as a tab somewhere
+- [ ] Style users
+- [ ] Padding for 'add users' section
 
-```bash
-pip install SQLAlchemy flask-socketio simple-websocket
-```
+### Back end
+<u>Database</u>
+- [ ] Create users option
 
-To run the app, 
 
-```bash
-python3 app.py
-```
-
-Since this app uses cookies, you can't open it in separate tabs to test multiple client communication. This is because cookies are shared across tabs.
-You'd have to use multiple browsers to test client communication.
+<u>Cryptography</u>
+- [ ] salt passwords
+- [ ] hash passwords
+- [ ] Encrypt messages (First decide on method of encryption)
