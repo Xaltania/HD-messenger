@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 
 import db
 import secrets
+import bcrypt
 # import logging
 
 # this turns off Flask Logging, uncomment this to turn off Logging
@@ -39,11 +40,16 @@ def login_user():
     password = request.json.get("password")
 
     user =  db.get_user(username)
+
     if user is None:
         return "Error: User does not exist!"
 
-    if user.password != password:
+    pw_bytes = password.encode('utf-8')
+    hash_match = bcrypt.checkpw(pw_bytes, user.password)
+    
+    if not hash_match:
         return "Error: Password does not match!"
+    
 
     return url_for('home', username=request.json.get("username"))
 
@@ -60,8 +66,11 @@ def signup_user():
     username = request.json.get("username")
     password = request.json.get("password")
 
+    pw_bytes = password.encode('utf-8')
+    pw_hash = bcrypt.hashpw(pw_bytes, bcrypt.gensalt())
+
     if db.get_user(username) is None:
-        db.insert_user(username, password)
+        db.insert_user(username, pw_hash)
         return url_for('home', username=username)
     return "Error: User already exists!"
 
