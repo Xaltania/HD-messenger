@@ -13,6 +13,9 @@
         width: 800px; 
         overflow: auto;
         padding: 2px;
+        margin: 0 auto;
+        display: block;
+        
     }
 
     .text  {
@@ -22,7 +25,7 @@
 
 </style>
 <nav style="border-bottom: 1px solid black;">
-    <ol style="float: right">
+    <ol style="float: left">
         <li style="display:inline-block">Username:  {{ username }} </li>
     </ol>
 </nav>
@@ -33,7 +36,7 @@
 
 <div id="chat_box">
 <p  class="text">Chat with: </p>
-<input id="receiver" placeholder="username">
+<input id="receiver" placeholder="Enter username">
 <button onclick="join_room()">Chat</button>
 </div>
 

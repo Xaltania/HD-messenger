@@ -11,7 +11,7 @@ import bcrypt
 # log.setLevel(logging.ERROR)
 
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static')
 
 # secret key used to sign the session cookie
 app.config['SECRET_KEY'] = secrets.token_hex()
@@ -91,4 +91,4 @@ def home():
 if __name__ == '__main__':
     ssl_context = ('certificate/localhost.crt', 'certificate/localhost.key')
     # ssl_context.load_cert_chain('certs/messenger.test.crt', 'certs/messenger.key')
-    socketio.run(app=app, ssl_context=ssl_context, port=443)
+    socketio.run(app=app, ssl_context=ssl_context, port=443, debug = True)

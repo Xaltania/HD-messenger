@@ -1,57 +1,92 @@
-ul {
-    list-style-type: none;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+body {
+  
+    background-color: #84c6f2;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #2e2e2e;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: rgb(220, 255, 236);
+  }
+  
+  h1 {
+    color: #ffffff;
+    font-size: 48px;
+    margin-top: 100px;
     text-align: center;
-    padding: 14px 16px;
+  }
+  
+  p {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  a {
+    color: #ffffff;
     text-decoration: none;
-}
-
-li a:hover {
-    background-color: #140049;
-    float:right;
-}
-
-head {
-    font-family:'Courier New', Courier, monospace;
-    
-}
-
-body {
-    font-family:'Courier New', Courier, monospace;
-    background-color: #ffe3ff;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-weight: 500;
-}
-
-img {
-    padding: 0;
-    display: block;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  a:hover {
+    color: #ffffff;
+  }
+  #username,
+  #password {
+    width: 50%;
     margin: 0 auto;
-    max-height: 45%;
-    max-width: 45%;
-}
+    display: block;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+  #receiver {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
 
-/* html, body, {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-}
+  }
+  #message_box {
+    border: 1px solid black; 
+    height: 400px; 
+    width: 800px; 
+    overflow: auto;
+    padding: 2px;
+    margin: 0 auto;
+    border-radius: 20px;
+    display: block;
+    background-color: #ffffff;
+  }
+  #message {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
 
-body {
-} */
+  }
+  button {
+    
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
