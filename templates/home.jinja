@@ -48,9 +48,11 @@
 </div>
 
 <script src="/static/js/libs/socket.io.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
     let room_id = 0;
-
+    // Define secret key for encryption
+    const secret_key = "mysecretkey";
 
     $("#message").on("keyup", (e) => {
         if (e.key == "Enter") {
@@ -80,13 +82,17 @@
 
     const socket = io();
       socket.on("incoming", (msg, color="black") => {
-        add_message(msg, color);
+        let sender= msg[0]
+        let encrypted_message = msg[1]
+        let decrypted_message = CryptoJS.AES.decrypt(encrypted_message, secret_key).toString(CryptoJS.enc.Utf8);
+        add_message(sender + ": " + decrypted_message, color);
       })
       
     function send() {
         let message = $("#message").val();
+        let encrypted_message = CryptoJS.AES.encrypt(message, secret_key).toString();
         $("#message").val("");
-        socket.emit("send", username, message, room_id);  
+        socket.emit("send", username, encrypted_message, room_id);  
     } 
 
     function join_room() {
