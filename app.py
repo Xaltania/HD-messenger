@@ -1,3 +1,7 @@
+# USYD CODE CITATION ACKNOWLEDGEMENT
+# I declare that the following code template is distributed by Winston Wijaya
+# With changes made to implement security features
+
 from flask import Flask, render_template, request, abort, url_for, jsonify
 from flask_socketio import SocketIO
 

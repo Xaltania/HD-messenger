@@ -1,3 +1,7 @@
+# USYD CODE CITATION ACKNOWLEDGEMENT
+# I declare that the following code template is distributed by Winston Wijaya
+# With changes made to implement security features
+
 '''
 models
 defines sql alchemy data models
