@@ -4,6 +4,10 @@
 
 from flask import Flask, render_template, request, abort, url_for, jsonify
 from flask_socketio import SocketIO
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+
+from models import User
 
 import db
 import secrets
@@ -19,6 +23,15 @@ app = Flask(__name__,static_folder='static')
 
 # secret key used to sign the session cookie
 app.config['SECRET_KEY'] = secrets.token_hex()
+# Database path
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/main.db"
+
+admin = Admin(app)
+class UserView(ModelView):
+    column_list = ('username', 'password')
+    column_sortable_list = ('username',)
+admin.add_view(UserView(User, db.Session()))
+
 socketio = SocketIO(app)
 
 # don't remove this!!
