@@ -3,7 +3,7 @@
 
 body {
   
-    background-color: #84c6f2;
+    background-color: #026153;
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -90,3 +90,87 @@ body {
   button:hover {
     background-color: #45a049;
   }
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  background-color: rgb(110, 23, 106);
+  color: #fff;
+}
+
+.logo {
+  font-size: 32px;
+  padding: 5px;
+}
+
+.logo img {
+  background-color: transparent;
+  margin: 15px;
+  height: 50px;
+  width: 50px;
+}
+
+/* NAVBAR MENU */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  font-size: 18px;
+  padding-right: 5%;
+  padding-top: 0px;
+}
+
+.menu a {
+  text-decoration: none;
+  padding: 0px;
+  color: #fff
+}
+
+.menu li {
+  list-style: none;
+}
+
+.menu a:hover {
+  color: #db923d;
+}
+
+.submenu {
+  position: absolute;
+  z-index: 1;
+  /* float: left; */
+  width: 50px;
+  background-color: rgb(110, 23, 106);
+  margin-top: -5px;
+  opacity: 0;
+  padding: 0;
+  margin-bottom: 15px;
+  transition: all ease 0.5s;
+}
+
+.dropdown:hover .submenu {
+  float: left;
+  background-color: rgba(110, 23, 106, 0.966);
+  opacity: 1;
+  margin-top: 0;
+  z-index: 2;
+}
+
+/* BUTTONS */
+.navigation-button {
+  text-decoration: none;
+  color:rgb(0, 0, 0);
+  text-align: center;
+  border-radius: 20px;
+  padding: 15px 35px;
+  width: 12em;
+  margin: 5px;
+  line-height: 50px;
+  background-color: #b6b095;
+}
+.navigation-button:hover {
+  cursor: pointer;
+  background-color: #c5ab63;
+}
