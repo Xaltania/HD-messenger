@@ -8,6 +8,20 @@
         <script src="/static/js/libs/js.cookie.min.js"></script>
     </head>
     <body>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">HD Messenger</a>
+            </div>
+            <ul class="nav-links">
+                <div class="menu">
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li><a href={{ url_for('login') }}> Login</a></li>
+                    <li><a href={{ url_for('signup') }}> Signup</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <a href={{ url_for('index') }} id="book-button" class="navigation-button">Make a post</a>
+                </div>
+            </ul>
+        </nav>
         {% block content %} {% endblock %}
     </body>
 </html>
