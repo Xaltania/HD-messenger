@@ -2,10 +2,11 @@
 # I declare that the following code template is distributed by Winston Wijaya
 # With changes made to implement security features
 
-from flask import Flask, render_template, request, abort, url_for, jsonify
+from flask import Flask, render_template, request, abort, url_for, jsonify, redirect
 from flask_socketio import SocketIO
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 from models import User
 
@@ -26,16 +27,85 @@ app.config['SECRET_KEY'] = secrets.token_hex()
 # Database path
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/main.db"
 
-admin = Admin(app)
+# Flask-admin setup
+admin = Admin(app, index_view=AdminIndexView(name='Admin'))
+login_manager = LoginManager(app)
+# Admin page
+
 class UserView(ModelView):
     column_list = ('username', 'password')
     column_sortable_list = ('username',)
+
+# Flask Login
+class AdminUser(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
+        self.is_admin = True
+
+@login_manager.user_loader
+def load_user(user_id):
+    return AdminUser(user_id)
+
+# Admin panel
 admin.add_view(UserView(User, db.Session()))
+
+# Custom AdminIndexView to handle the login page
+class MyAdminIndexView(AdminIndexView):
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.is_admin
+    @app.route('/admin/login', methods=['GET', 'POST'])
+    
+    def admin_login():
+        if request.method == 'POST':
+            username = request.form['username']
+            password = request.form['password']
+            
+            user = db.get_user(username)
+            
+            if user is None:
+                return "Error: User does not exist!"
+            
+            pw_bytes = password.encode('utf-8')
+            hash_match = bcrypt.checkpw(pw_bytes, user.password)
+            
+            if not hash_match:
+                return "Error: Password does not match!"
+            
+            # Create an instance of AdminUser and login
+            admin_user = AdminUser(user.username)
+            login_user(admin_user)
+            
+            return redirect('/admin')
+        
+        return render_template('login.jinja')
+        
+    # Override the is_accessible method to check if the admin is logged in
+    def is_accessible(self):
+        if not current_user.is_authenticated:
+            return redirect(url_for('admin_login'))
+        return current_user.is_admin
+
+    # Override the inaccessible_callback method to redirect to the login page
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('admin_login'))
+
+    
+# Override the is_accessible method to check if the admin is logged in
+def is_accessible(self):
+    return current_user.is_authenticated
+
+# Override the inaccessible_callback method to redirect to the login page
+def inaccessible_callback(self, name, **kwargs):
+    return redirect(url_for('admin_login'))
+
+admin.index_view = MyAdminIndexView()
 
 socketio = SocketIO(app)
 
 # don't remove this!!
 import socket_routes
+
 
 # index page
 @app.route("/")
@@ -107,5 +177,4 @@ def home():
 
 if __name__ == '__main__':
     ssl_context = ('certificate/localhost.crt', 'certificate/localhost.key')
-    # ssl_context.load_cert_chain('certs/messenger.test.crt', 'certs/messenger.key')
     socketio.run(app=app, ssl_context=ssl_context, port=443, debug = True)
