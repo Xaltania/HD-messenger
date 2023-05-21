@@ -65,9 +65,11 @@ class Post(Base):
     __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True)
-    content = Column(String(500))
-    is_anonymous = Column(Boolean)
+    content = Column(String(255), nullable=False)
+    is_anonymous = Column(Boolean, nullable=False)
+    author = Column(String(50))
 
-    def __init__(self, content, is_anonymous):
+    def __init__(self, content, is_anonymous, author):
         self.content = content
         self.is_anonymous = is_anonymous
+        self.author = author

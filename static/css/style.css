@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-
+@font-face {
+  font-family: 'Quicksand';
+  src: url(/static/fonts/Quicksand-VariableFont_wght.ttf) format('truetype');
+}
+* {
+  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
 body {
   
     background-color: #026153;
-    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -189,9 +193,14 @@ form {
 input[type="submit"]
 {
   background-color: #4CAF50;
-    width: 10%;
+    width: 80px;
     padding: 5px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+
+#logout {
+  background-color: rgb(253, 128, 128);
 }

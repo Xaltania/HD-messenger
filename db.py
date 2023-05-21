@@ -33,9 +33,9 @@ def get_user(username: str):
     return user
 
 # inserts a post into the database
-def create_post(content: str, is_anonymous: bool):
+def create_post(content: str, is_anonymous: bool, author: str):
     session = Session()
-    post = Post(content=content, is_anonymous=is_anonymous)
+    post = Post(content=content, is_anonymous=is_anonymous, author=author)
     session.add(post)
     session.commit()
     session.close()

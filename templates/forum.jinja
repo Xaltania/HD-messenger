@@ -14,13 +14,29 @@
     <!-- Form to submit a new post -->
     <center>
         <h2>Post a New Question or Comment</h2>
-        <form action="{{ url_for('create_post') }}" method="POST">
-            <textarea name="content" rows="4" cols="50" placeholder="Type your post here"></textarea>
+        <form id="postForm" action="{{ url_for('create_post') }}" method="POST">
+            <textarea name="content" rows="4" cols="50" placeholder="create your thread"></textarea>
             <label>
                 <input type="checkbox" name="anonymous"> Post Anonymously
             </label>
             <br>
-            <input type="submit" value="Submit">
+            <input id="submitButton" type="submit" value="Submit">
         </form>
     </center>
+
+    <script>
+        // Function to redirect to the login page when the submit button is clicked
+        function redirectToLogin() {
+            window.location.href = "{{ url_for('login') }}";
+        }
+
+        // Check if the user is logged in when submitting
+        document.getElementById("submitButton").addEventListener("click", function(event) {
+            // Check if the user is not logged in
+            if ("{{ session.get('username') }}" === undefined) {
+                event.preventDefault(); // Prevent the default form submission
+                redirectToLogin(); // Redirect to the login page
+            }
+        });
+    </script>
 {% endblock %}
