@@ -1,0 +1,26 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+    <h1>Forum</h1>
+    
+    <!-- Display existing forum posts -->
+    {% for post in posts %}
+        <div class="post">
+            <p>{{ post.content }}</p>
+            <p>Posted by: {% if post.is_anonymous %}Anonymous{% else %}{{ post.author }}{% endif %}</p>
+        </div>
+    {% endfor %}
+    
+    <!-- Form to submit a new post -->
+    <center>
+        <h2>Post a New Question or Comment</h2>
+        <form action="{{ url_for('create_post') }}" method="POST">
+            <textarea name="content" rows="4" cols="50" placeholder="Type your post here"></textarea>
+            <label>
+                <input type="checkbox" name="anonymous"> Post Anonymously
+            </label>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </center>
+{% endblock %}

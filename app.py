@@ -137,7 +137,6 @@ def login_user():
     if not hash_match:
         return "Error: Password does not match!"
     
-
     return url_for('home', username=request.json.get("username"))
 
 # handles a get request to the signup page
@@ -160,6 +159,25 @@ def signup_user():
         db.insert_user(username, pw_hash)
         return url_for('home', username=username)
     return "Error: User already exists!"
+
+# Route to display the forum page
+@app.route("/forum")
+def forum():
+    # Retrieve existing forum posts from the database
+    posts = db.get_posts()
+
+    return render_template("forum.jinja", posts=posts)
+
+# Route to handle form submission and create a new post
+@app.route("/forum/create_post", methods=["POST"])
+def create_post():
+    content = request.form.get("content")
+    anonymous = bool(request.form.get("anonymous"))
+
+    # Save the post to the database
+    db.create_post(content, anonymous)
+
+    return redirect(url_for("forum"))
 
 # handler when a "404" error happens
 @app.errorhandler(404)

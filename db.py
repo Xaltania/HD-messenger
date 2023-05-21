@@ -31,3 +31,18 @@ def get_user(username: str):
     user = session.query(User).get(username)
     session.close()
     return user
+
+# inserts a post into the database
+def create_post(content: str, is_anonymous: bool):
+    session = Session()
+    post = Post(content=content, is_anonymous=is_anonymous)
+    session.add(post)
+    session.commit()
+    session.close()
+
+# retrieves all posts from the database
+def get_posts():
+    session = Session()
+    posts = session.query(Post).all()
+    session.close()
+    return posts

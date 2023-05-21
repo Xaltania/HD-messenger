@@ -174,3 +174,24 @@ body {
   cursor: pointer;
   background-color: #c5ab63;
 }
+
+.post {
+  display: flex;
+  flex-direction: column;
+  background-color: #a2b695;
+  padding-bottom: 45px;
+}
+
+form {
+  /* display: flex; */
+}
+
+input[type="submit"]
+{
+  background-color: #4CAF50;
+    width: 10%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

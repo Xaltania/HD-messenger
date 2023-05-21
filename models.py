@@ -8,7 +8,7 @@ defines sql alchemy data models
 also contains the definition for the room class used to keep track of socket.io rooms
 '''
 
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, Column, Boolean
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from typing import Dict
 
@@ -61,3 +61,13 @@ class Room():
             return None
         return self.dict[user]
     
+class Post(Base):
+    __tablename__ = 'posts'
+
+    id = Column(Integer, primary_key=True)
+    content = Column(String(500))
+    is_anonymous = Column(Boolean)
+
+    def __init__(self, content, is_anonymous):
+        self.content = content
+        self.is_anonymous = is_anonymous
