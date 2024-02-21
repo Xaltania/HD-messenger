@@ -1,15 +1,15 @@
 # HD Messenger
 ## Checklist
-- [ ] Add messaging tab on the right, or as a tab somewhere
-- [ ] Style users
-- [ ] Padding for 'add users' section
+- [x] Add messaging tab on the right, or as a tab somewhere
+- [x] Style users
+- [x] Padding for 'add users' section
 
 ### Back end
 <u>Database</u>
-- [ ] Create users option
+- [x] Create users option
 
 
 <u>Cryptography</u>
-- [ ] salt passwords
-- [ ] hash passwords
-- [ ] Encrypt messages (First decide on method of encryption)
+- [x] salt passwords
+- [x] hash passwords
+- [x] Encrypt messages (First decide on method of encryption)
